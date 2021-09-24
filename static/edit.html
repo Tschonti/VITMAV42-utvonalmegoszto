@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Útvonalmegosztó - Új útvonal</title>
+    <title>Útvonalmegosztó - Útvonal szerkesztése</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
     <link href="styles.css" rel="stylesheet">
 </head>
@@ -20,30 +20,36 @@
         </div>
     </nav>
     <div class="container">
-        <h1 class="myheader">Új útvonal</h1>
+        <h1 class="myheader">Útvonal szerkesztése</h1>
         <form>
             <div class="mb-3">
                 <label for="name" class="form-label">Útvonal neve</label>
-                <input class="form-control" id="name" name="name" placeholder="Útvonal neve...">
+                <input class="form-control" id="name" name="name" placeholder="Útvonal neve..." value="Dobogő-kő túra">
             </div>
             <div class="row">
                 <div class="mb-3 col">
                     <label for="length" class="form-label">Hossz (km)</label>
-                    <input type="number" class="form-control" id="length" name="length" placeholder="Útvonal hossza...">
+                    <input type="number" class="form-control" id="length" name="length" placeholder="Útvonal hossza..." value="7.96">
                 </div>
                 <div class="mb-3 col">
                     <label for="elevation" class="form-label">Szintemelkedés (m)</label>
-                    <input type="number" class="form-control" id="elevation" name="elevation" placeholder="Szintemelkedés...">
+                    <input type="number" class="form-control" id="elevation" name="elevation" placeholder="Szintemelkedés..." value="325">
                 </div>
             </div>
             <div class="mb-3">
                 <label for="link" class="form-label">Link (pl. Strava, Futótérkép, stb...)</label>
-                <input class="form-control" id="link" name="link" placeholder="Link...">
+                <input class="form-control" id="link" name="link" placeholder="Link..." value="https://www.strava.com/routes/2872918524354908336">
             </div>
-            <div class="flex2">
-                <input type="submit" class="btn btn-success mybtn" value="Mentés">
-                <a href="/" class="btn btn-secondary">Mégse</a>
+            <div class="flex">
+                <div class="flex2">
+                    <input type="submit" class="btn btn-success mybtn" value="Mentés">
+                    <a href="/route.html" class="btn btn-secondary">Mégse</a>
+                </div>
+                <div>
+                    <button class="btn btn-danger" onClick="confirm('Biztosan törlöd az útvonalat?')">Törlés</button>
+                </div>
             </div>
+
         </form>
     </div>
 

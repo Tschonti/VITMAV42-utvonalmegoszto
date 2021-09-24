@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-F3w7mX95PdgyTmZZMECAngseQB83DfGTowi0iMjiWaeVhAn4FJkqJByhZMI3AhiU" crossorigin="anonymous">
+    <link href="styles.css" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/1a5ad85633.js" crossorigin="anonymous"></script>
+    <title>Útvonalmegosztó - Dobogó-kő túra</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light mynav">
+        <div id="mynavcont" class="container-fluid">
+            <a class="navbar-brand" href="/">Útvonalmegosztó</a>
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="/new.html">Új útvonal</a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="flex">
+            <h1 class="myheader">Dobogó-kő túra</h1>
+            <div class="vert-middle">
+                <a href="/edit.html" class="btn btn-success">Útvonal szerkesztése</a>
+            </div>
+        </div>
+        <p>
+            Hossz: 7.96 km <br/>
+            Szintemelkedés: 325 m <br/>
+            Link: <a class="mylink" rel="noopener noreferrer" target="_blank" href="https://www.strava.com/routes/2872918524354908336">https://www.strava.com/routes/2872918524354908336</a>
+        </p>
+        <div class="flex">
+            <h2>Teljesítések</h2>
+            <div><button type="button" data-toggle="modal" data-target="#new-effort-modal" class="btn btn-success">Új teljesítés</a></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-md-4">
+                <h3 class="centered">Túrázva</h3>
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <th>Név</th>
+                        <th>Idő</th>
+                        <th>Törlés</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Fekete Sámuel</td>
+                            <td>3:15:00</td>
+                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>Kovács István</td>
+                            <td>5:47:22</td>
+                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-4">
+                <h3 class="centered">Futva</h3>
+                <table class="table table-striped align-middle">
+                    <thead>
+                        <th>Név</th>
+                        <th>Idő</th>
+                        <th>Törlés</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nagy Endre</td>
+                            <td>00:42:37</td>
+                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>Horváth Eszter</td>
+                            <td>00:45:11</td>
+                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                        <tr>
+                            <td>Dalai Láma</td>
+                            <td>01:06:02</td>
+                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col-12 col-md-4">
+                <h3 class="centered">Kerékpározva</h3>
+                <p class="centered">Még senki sem teljesítette ezt az útvonalat ilyen módon. Legyél te az első!</p>
+            </div>
+        </div>
+
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="new-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Új teljesítés - Dobogó-kő túra</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-effort-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Teljesítő neve</label>
+                            <input class="form-control" id="name" name="name" placeholder="Név...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Teljesítés ideje (óó:pp:mm)</label>
+                            <input class="form-control" id="duration" name="duration" placeholder="Idő...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Teljesítés módja</label>
+                            <select class="custom-select form-control" id="type" name="type" >
+                                <option value="0" disabled selected>Válassz sportot...</option>
+                                <option value="1">Túra</option>
+                                <option value="2">Futás</option>
+                                <option value="3">Kerékpározás</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Mentés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+</body>
+</html>
