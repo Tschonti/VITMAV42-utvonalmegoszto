@@ -25,17 +25,17 @@
         <div class="flex">
             <h1 class="myheader">Dobogó-kő túra</h1>
             <div class="vert-middle">
-                <a href="/edit.html" class="btn btn-success">Útvonal szerkesztése</a>
+                <a href="/edit.html" class="btn btn-success large-text">Szerkesztés</a>
             </div>
         </div>
         <p>
             Hossz: 7.96 km <br/>
             Szintemelkedés: 325 m <br/>
-            Link: <a class="mylink" rel="noopener noreferrer" target="_blank" href="https://www.strava.com/routes/2872918524354908336">https://www.strava.com/routes/2872918524354908336</a>
+            Link: <a class="mylink" rel="noopener noreferrer" target="_blank" href="https://www.strava.com/routes/2872918524354908336">https://www.strava.com/routes/28...</a>
         </p>
         <div class="flex">
             <h2>Teljesítések</h2>
-            <div><button type="button" data-toggle="modal" data-target="#new-effort-modal" class="btn btn-success">Új teljesítés</a></div>
+            <div><button type="button" data-bs-toggle="modal" data-bs-target="#new-effort-modal" class="btn btn-success large-text">Új teljesítés</a></div>
         </div>
         <div class="row">
             <div class="col-12 col-md-4">
@@ -99,10 +99,8 @@
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLongTitle">Új teljesítés - Dobogó-kő túra</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+                    <h5 class="modal-title" id="exampleModalLongTitle">Új teljesítés - Dobogó-kő túra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <form id="new-effort-form">
@@ -116,7 +114,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="type" class="form-label">Teljesítés módja</label>
-                            <select class="custom-select form-control" id="type" name="type" >
+                            <select class="form-select" id="type" name="type" >
                                 <option value="0" disabled selected>Válassz sportot...</option>
                                 <option value="1">Túra</option>
                                 <option value="2">Futás</option>
@@ -126,13 +124,13 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Mégse</button>
-                    <button type="button" class="btn btn-success" data-dismiss="modal">Mentés</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Mentés</button>
                 </div>
             </div>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
 </body>
 </html>
