@@ -39,3 +39,7 @@
 .centered {
     text-align: center;
 }
+
+.white, .white:hover, .white:focus {
+    color: white;
+}

@@ -35,71 +35,96 @@
         </p>
         <div class="flex">
             <h2>Teljesítések</h2>
-            <div><button type="button" data-bs-toggle="modal" data-bs-target="#new-effort-modal" class="btn btn-success large-text">Új teljesítés</a></div>
+            <div><button type="button" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="clearModal()" class="btn btn-success large-text">Új teljesítés</a></div>
         </div>
         <div class="row">
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-lg-4">
                 <h3 class="centered">Túrázva</h3>
                 <table class="table table-striped align-middle">
                     <thead>
                         <th>Név</th>
                         <th>Idő</th>
-                        <th>Törlés</th>
+                        <th>Módosítás</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Fekete Sámuel</td>
                             <td>3:15:00</td>
-                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                            <td>
+                                <div class="flex2">
+                                    <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 0, 1)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, 1)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Kovács István</td>
                             <td>5:47:22</td>
-                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                            <td>
+                                <div class="flex2">
+                                    <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 0, 2)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, 2)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-lg-4">
                 <h3 class="centered">Futva</h3>
                 <table class="table table-striped align-middle">
                     <thead>
                         <th>Név</th>
                         <th>Idő</th>
-                        <th>Törlés</th>
+                        <th>Módosítás</th>
                     </thead>
                     <tbody>
                         <tr>
                             <td>Nagy Endre</td>
                             <td>00:42:37</td>
-                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                            <td>
+                                <div class="flex2">
+                                    <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, 3)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, 3)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Horváth Eszter</td>
                             <td>00:45:11</td>
-                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                            <td>
+                                <div class="flex2">
+                                    <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, 4)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, 4)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
                         </tr>
                         <tr>
                             <td>Dalai Láma</td>
                             <td>01:06:02</td>
-                            <td><button class="btn btn-danger" onclick="confirm('Biztosan törlöd ezt a teljesítést?')"><i class="fas fa-trash-alt"></i></button></td>
+                            <td>
+                                <div class="flex2">
+                                    <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, 5)"><i class="fas fa-edit"></i></button>
+                                    <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, 5)"><i class="fas fa-trash-alt"></i></button>
+                                </div>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-            <div class="col-12 col-md-4">
+            <div class="col-12 col-lg-4">
                 <h3 class="centered">Kerékpározva</h3>
                 <p class="centered">Még senki sem teljesítette ezt az útvonalat ilyen módon. Legyél te az első!</p>
             </div>
         </div>
 
     </div>
-    <!-- Modal -->
+    <!-- New/Edit modal -->
     <div class="modal fade" id="new-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLongTitle">Új teljesítés - Dobogó-kő túra</h5>
+                    <h5 class="modal-title" id="modalTitle"><span id="titlePartOne">Új teljesítés</span> - Dobogó-kő túra</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -125,12 +150,73 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-                    <button type="button" class="btn btn-success" data-bs-dismiss="modal">Mentés</button>
+                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit()" data-bs-dismiss="modal">Mentés</button>
                 </div>
             </div>
         </div>
     </div>
+
+    <!-- Delete modal -->
+    <div class="modal fade" id="delete-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Teljesítés törlése</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Biztosan törlöd ezt a teljesítést?<span id="effort-data"></span><br/>
+                    Ezt később nem tudod visszavonni!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                    <button type="button" id="deleteSubmit" class="btn btn-danger" data-id="" onclick="onDeleteSubmit()" data-bs-dismiss="modal">Törlés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous"></script>
+    <script>
+        function clearModal() {
+            document.getElementById('name').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('type').selectedIndex = 0   ;
+            document.getElementById('titlePartOne').innerHTML = 'Új teljesítés';
+            document.getElementById('newEditSubmit').dataset.id = '';
+        }
+
+        function fillModal(el, mode, id) {
+            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
+            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
+            document.getElementById('titlePartOne').innerHTML = 'Teljesítés szerkesztése';
+            document.getElementById('duration').value = duration;
+            document.getElementById('name').value = name;
+            document.getElementById('type').selectedIndex = mode + 1;
+            document.getElementById('newEditSubmit').dataset.id = id;
+        }
+
+        function fillDeleteModal(el, id) {
+            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
+            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
+            document.getElementById('effort-data').innerHTML = ` ${name}, ${duration}`;
+            document.getElementById('deleteSubmit').dataset.id = id;
+        }
+
+        function onNewEditSubmit() {
+            const id = document.getElementById('newEditSubmit').dataset.id;
+            if (id > 0) {
+                console.log(`Effort with id=${id} editted.`)
+            } else {
+                console.log('New effort added.')
+            }
+        }
+
+        function onDeleteSubmit() {
+            const id = document.getElementById('deleteSubmit').dataset.id;
+            console.log(`Effort with id=${id} deleted.`)
+        }
+    </script>
 </body>
 </html>
