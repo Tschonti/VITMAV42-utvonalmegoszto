@@ -1,0 +1,206 @@
+<%- include('header') %>
+
+    <div class="container">
+        <div class="flex">
+            <h1 class="myheader"><%= route.name %></h1>
+            <div class="vert-middle">
+                <a href="<%=`/routes/edit/${route.id}`%>" class="btn btn-success large-text">Szerkesztés</a>
+            </div>
+        </div>
+        <p>
+            Hossz: <%= route.length %> km <br/>
+            Szintemelkedés: <%= route.elevation %> m <br/>
+            Link: <a class="mylink" rel="noopener noreferrer" target="_blank" href="<%= route.link %>"><%= route.link %></a>
+        </p>
+        <div class="flex">
+            <h2>Teljesítések</h2>
+            <div><button type="button" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="clearModal()" class="btn btn-success large-text">Új teljesítés</a></div>
+        </div>
+        <div class="row">
+            <div class="col-12 col-lg-4">
+                <h3 class="centered">Túrázva</h3>
+                <% if (efforts.hiking.length === 0) { %>
+                    <p class="centered">Még senki sem teljesítette ezt az útvonalat ilyen módon. Legyél te az első!</p>
+                <% } else { %>
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <th><i class="fas fa-medal"></i></th>
+                            <th>Név</th>
+                            <th>Idő</th>
+                            <th>Módosítás</th>
+                        </thead>
+                        <tbody>
+                            <% efforts.hiking.forEach(function(effort, idx) { %>
+                                <tr>
+                                    <td><%= idx + 1%>.</td>
+                                    <td><%= effort.name %></td>
+                                    <td><%= effort.time %></td>
+                                    <td>
+                                        <div class="flex2">
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 0, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
+            <div class="col-12 col-lg-4">
+                <h3 class="centered">Futva</h3>
+                <% if (efforts.running.length === 0) { %>
+                    <p class="centered">Még senki sem teljesítette ezt az útvonalat ilyen módon. Legyél te az első!</p>
+                <% } else { %>
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <th><i class="fas fa-medal"></i></th>
+                            <th>Név</th>
+                            <th>Idő</th>
+                            <th>Módosítás</th>
+                        </thead>
+                        <tbody>
+                            <% efforts.running.forEach(function(effort, idx) { %>
+                                <tr>
+                                    <td><%= idx + 1%>.</td>
+                                    <td><%= effort.name %></td>
+                                    <td><%= effort.time %></td>
+                                    <td>
+                                        <div class="flex2">
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
+            <div class="col-12 col-lg-4">
+                <h3 class="centered">Kerékpározva</h3>
+                <% if (efforts.cycling.length === 0) { %>
+                    <p class="centered">Még senki sem teljesítette ezt az útvonalat ilyen módon. Legyél te az első!</p>
+                <% } else { %>
+                    <table class="table table-striped align-middle">
+                        <thead>
+                            <th><i class="fas fa-medal"></i></th>
+                            <th>Név</th>
+                            <th>Idő</th>
+                            <th>Módosítás</th>
+                        </thead>
+                        <tbody>
+                            <% efforts.cycling.forEach(function(effort, idx) { %>
+                                <tr>
+                                    <td><%= idx + 1%>.</td>
+                                    <td><%= effort.name %></td>
+                                    <td><%= effort.time %></td>
+                                    <td>
+                                        <div class="flex2">
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 2, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-effort-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                        </div>
+                                    </td>
+                                </tr>
+                            <% }) %>
+                        </tbody>
+                    </table>
+                <% } %>
+            </div>
+        </div>
+
+    </div>
+    <!-- New/Edit modal -->
+    <div class="modal fade" id="new-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle"><span id="titlePartOne">Új teljesítés</span> - Dobogó-kő túra</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-effort-form">
+                        <div class="mb-3">
+                            <label for="name" class="form-label">Teljesítő neve</label>
+                            <input class="form-control" id="name" name="name" placeholder="Név...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="duration" class="form-label">Teljesítés ideje (óó:pp:mm)</label>
+                            <input class="form-control" id="duration" name="duration" placeholder="Idő...">
+                        </div>
+                        <div class="mb-3">
+                            <label for="type" class="form-label">Teljesítés módja</label>
+                            <select class="form-select" id="type" name="type" >
+                                <option value="0" disabled selected>Válassz sportot...</option>
+                                <option value="1">Túra</option>
+                                <option value="2">Futás</option>
+                                <option value="3">Kerékpározás</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit()" data-bs-dismiss="modal">Mentés</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Delete modal -->
+    <div class="modal fade" id="delete-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="modalTitle">Teljesítés törlése</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Biztosan törlöd ezt a teljesítést?<span id="effort-data"></span><br/>
+                    Ezt később nem tudod visszavonni!
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
+                    <a href="" id="deleteSubmit" class="btn btn-danger">Törlés</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script>
+        function clearModal() {
+            document.getElementById('name').value = '';
+            document.getElementById('duration').value = '';
+            document.getElementById('type').selectedIndex = 0   ;
+            document.getElementById('titlePartOne').innerHTML = 'Új teljesítés';
+            document.getElementById('newEditSubmit').dataset.id = '';
+        }
+
+        function fillModal(el, mode, id) {
+            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
+            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
+            document.getElementById('titlePartOne').innerHTML = 'Teljesítés szerkesztése';
+            document.getElementById('duration').value = duration;
+            document.getElementById('name').value = name;
+            document.getElementById('type').selectedIndex = mode + 1;
+            document.getElementById('newEditSubmit').dataset.id = id;
+        }
+
+        function fillDeleteModal(el, id) {
+            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
+            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
+            document.getElementById('effort-data').innerHTML = ` ${name}, ${duration}`;
+            document.getElementById('deleteSubmit').setAttribute('href', '/efforts/del/' + id);
+        }
+
+        function onNewEditSubmit() {
+            const id = document.getElementById('newEditSubmit').dataset.id;
+            if (id > 0) {
+                console.log(`POST request to /efforts/edit/${id} ...`)
+            } else {
+                console.log('POST request to /efforts/new ...')
+            }
+        }
+    </script>
+<%- include('footer') %>

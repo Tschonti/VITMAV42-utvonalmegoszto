@@ -7,6 +7,7 @@
  */
  module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        res.locals.title = "Útvonalmegosztó"
+        return next();
     };
 };

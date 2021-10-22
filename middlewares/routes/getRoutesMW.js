@@ -7,6 +7,29 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        res.locals.routes = [
+            {
+                id: 1,
+                name: "Dobogó-kő túra",
+                length: 7.96,
+                elevation: 325,
+                efforts: 5
+            },
+            {
+                id: 2,
+                name: "Gellért-hegyi kör",
+                length: 4.3,
+                elevation: 175,
+                efforts: 3
+            },
+            {
+                id: 3,
+                name: "Szentendre és vissza",
+                length: 55.3,
+                elevation: 50,
+                efforts: 1
+            },
+        ]
+        return next();
     };
 };

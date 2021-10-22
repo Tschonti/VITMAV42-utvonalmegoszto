@@ -7,6 +7,9 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        res.locals.effort = {
+            id: 1
+        }
+        return next();
     };
 };

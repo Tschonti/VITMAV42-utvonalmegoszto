@@ -14,18 +14,18 @@ module.exports = app => {
     app.get('/',
         getRoutesMW(),
         getEffortCountMW(),
-        renderMW('index.html')
+        renderMW('index')
     )
 
     app.use('/routes/new',
         saveRouteMW(),
-        renderMW('new.html')
+        renderMW('new_edit')
     )
 
     app.use('/routes/edit/:route_id',
         getRouteMW(),
         saveRouteMW(),
-        renderMW('edit.html')
+        renderMW('new_edit')
     )
 
     app.get('/routes/del/:route_id',
@@ -38,7 +38,7 @@ module.exports = app => {
     app.get('/routes/show/:route_id',
         getRouteMW(),
         getEffortsForRouteMW(),
-        renderMW('route.html')
+        renderMW('route')
     )
 
     app.post('/efforts/new',

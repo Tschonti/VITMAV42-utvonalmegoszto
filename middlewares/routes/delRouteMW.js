@@ -7,6 +7,6 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        return next();
     };
 };

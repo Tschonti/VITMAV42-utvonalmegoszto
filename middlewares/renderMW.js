@@ -1,12 +1,10 @@
-const path = require('path');
-
 /**
- * For now it just renders the html file it gets as a parameter, it'll eventually render a template.
- * @param {*} fileName
+ * Renders the given template with the parameters in res.locals
+ * @param {*} template filename of the template in /views
  * @returns
  */
-module.exports = fileName => {
+module.exports = template => {
     return (req, res) => {
-        res.sendFile(path.resolve('/static/' + fileName), options={root: process.cwd()})
+        res.render(template, res.locals)
     }
 }

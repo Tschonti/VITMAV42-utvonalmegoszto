@@ -7,6 +7,13 @@
  */
  module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        res.locals.route = {
+                id: 1,
+                name: "Dobogó-kő túra",
+                length: 7.96,
+                elevation: 325,
+                link: "https://www.strava.com/routes/2872918524354908336"
+            }
+        return next();
     };
 };

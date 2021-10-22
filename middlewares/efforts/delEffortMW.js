@@ -7,6 +7,6 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        return res.redirect(`/routes/show/${res.locals.effort.id}`);
     };
 };

@@ -9,6 +9,16 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        next();
+        if (req.method === "GET") {
+            if (typeof(res.locals.route) !== 'undefined') {
+                res.locals.title = "Útvonalmegosztó - Útvonal szerkesztése"
+            } else {
+                res.locals.title = "Útvonalmegosztó - Új útvonal"
+            }
+        } else {
+            return res.redirect('/')
+        }
+
+        return next();
     };
 };
