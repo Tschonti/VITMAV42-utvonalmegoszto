@@ -8,6 +8,21 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        return next();
+        const errors = []
+        if (req.body.name === '') {
+            errors.push('Add meg a teljesítő nevét!')
+        } if (req.body.time === '') {
+            errors.push('Add meg a teljesítés időtartamát!')
+        } else if (req.body.time.split(":").length !== 3) {
+            errors.push("Érvénytelen időformátum! Helyesen: óó:pp:mm")
+        } if (Number.isNaN(parseInt(req.body.type))) {
+            errors.push('Érvénytelen teljesítési mód!')
+        } else if (req.body.type < 1 || req.body.type > 3) {
+            errors.push('Érvénytelen teljesítési mód!')
+        } if (errors.length > 0) {
+            return res.status(400).json({errors: errors})
+        }
+        //save to db...
+        return res.status(200).json({okay: true})
     };
 };

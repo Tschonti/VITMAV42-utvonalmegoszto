@@ -113,6 +113,7 @@
     <div class="modal fade" id="new-effort-modal" tabindex="-1" role="dialog" aria-labelledby="new-effort-modalTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
+                <div class="alert alert-danger" hidden role="alert" id="errors"></div>
                 <div class="modal-header">
                     <h5 class="modal-title" id="modalTitle"><span id="titlePartOne">Új teljesítés</span> - Dobogó-kő túra</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -124,8 +125,8 @@
                             <input class="form-control" id="name" name="name" placeholder="Név...">
                         </div>
                         <div class="mb-3">
-                            <label for="duration" class="form-label">Teljesítés ideje (óó:pp:mm)</label>
-                            <input class="form-control" id="duration" name="duration" placeholder="Idő...">
+                            <label for="time" class="form-label">Teljesítés ideje (óó:pp:mm)</label>
+                            <input class="form-control" id="time" name="time" placeholder="Idő...">
                         </div>
                         <div class="mb-3">
                             <label for="type" class="form-label">Teljesítés módja</label>
@@ -140,7 +141,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit()" data-bs-dismiss="modal">Mentés</button>
+                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit()">Mentés</button>
                 </div>
             </div>
         </div>
@@ -167,39 +168,5 @@
     </div>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script>
-        function clearModal() {
-            document.getElementById('name').value = '';
-            document.getElementById('duration').value = '';
-            document.getElementById('type').selectedIndex = 0   ;
-            document.getElementById('titlePartOne').innerHTML = 'Új teljesítés';
-            document.getElementById('newEditSubmit').dataset.id = '';
-        }
-
-        function fillModal(el, mode, id) {
-            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
-            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
-            document.getElementById('titlePartOne').innerHTML = 'Teljesítés szerkesztése';
-            document.getElementById('duration').value = duration;
-            document.getElementById('name').value = name;
-            document.getElementById('type').selectedIndex = mode + 1;
-            document.getElementById('newEditSubmit').dataset.id = id;
-        }
-
-        function fillDeleteModal(el, id) {
-            const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
-            const duration = el.parentElement.parentElement.previousElementSibling.innerHTML;
-            document.getElementById('effort-data').innerHTML = ` ${name}, ${duration}`;
-            document.getElementById('deleteSubmit').setAttribute('href', '/efforts/del/' + id);
-        }
-
-        function onNewEditSubmit() {
-            const id = document.getElementById('newEditSubmit').dataset.id;
-            if (id > 0) {
-                console.log(`POST request to /efforts/edit/${id} ...`)
-            } else {
-                console.log('POST request to /efforts/new ...')
-            }
-        }
-    </script>
+    <script src="/route.js"></script>
 <%- include('footer') %>
