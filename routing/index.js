@@ -2,6 +2,7 @@ const getRoutesMW = require('../middlewares/routes/getRoutesMW')
 const getEffortCountMW = require('../middlewares/efforts/getEffortCountMW')
 const saveRouteMW = require('../middlewares/routes/saveRouteMW')
 const getRouteMW = require('../middlewares/routes/getRouteMW')
+const getTitleMW = require('../middlewares/routes/getTitleMW')
 const delRouteMW = require('../middlewares/routes/delRouteMW')
 const getEffortMW = require('../middlewares/efforts/getEffortMW')
 const getEffortsForRouteMW = require('../middlewares/efforts/getEffortsForRouteMW')
@@ -19,12 +20,14 @@ module.exports = app => {
 
     app.use('/routes/new',
         saveRouteMW(),
+        getTitleMW(),
         renderMW('new_edit')
     )
 
     app.use('/routes/edit/:route_id',
         getRouteMW(),
         saveRouteMW(),
+        getTitleMW(),
         renderMW('new_edit')
     )
 

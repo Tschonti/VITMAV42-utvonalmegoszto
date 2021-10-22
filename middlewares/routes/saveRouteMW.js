@@ -9,16 +9,29 @@
  */
 module.exports = objectrepository => {
     return (req, res, next) => {
-        if (req.method === "GET") {
-            if (typeof(res.locals.route) !== 'undefined') {
-                res.locals.title = "Útvonalmegosztó - Útvonal szerkesztése"
-            } else {
-                res.locals.title = "Útvonalmegosztó - Új útvonal"
+        if (req.method === "POST") {
+            if (req.body.name === '') {
+                (res.locals.errors = res.locals.errors || []).push('Adj nevet az útvonalnak!')
+            } if (req.body.length === '') {
+                (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal hosszát!')
+            } if (req.body.elevation === '') {
+                (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal szintemelkedését!')
+            } if (req.body.link === '') {
+                (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal linkjét!')
+            } if (Number.isNaN(parseFloat(req.body.length))) {
+                (res.locals.errors = res.locals.errors || []).push('Az útvonal hosszának számnak kell lennie!')
+            } if (Number.isNaN(parseInt(req.body.elevation))) {
+                (res.locals.errors = res.locals.errors || []).push('Az útvonal szintemelkedésének egész számnak kell lennie!')
+            } if (!req.body.link.startsWith('https://')) {
+                (res.locals.errors = res.locals.errors || []).push('Érvénytelen link!')
             }
-        } else {
+            if (typeof res.locals.errors !== "undefined") {
+                return next()
+            }
+
+            //save to db...
             return res.redirect('/')
         }
-
-        return next();
+        return next()
     };
 };

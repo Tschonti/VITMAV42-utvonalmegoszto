@@ -21,3 +21,11 @@
             </ul>
         </div>
     </nav>
+    <div class="container">
+        <% if (typeof errors !== "undefined") { %>
+            <div class="alert alert-danger" role="alert">
+                <% errors.forEach(function(err) { %>
+                    <li><%= err %></li>
+                <% }) %>
+            </div>
+        <% } %>
