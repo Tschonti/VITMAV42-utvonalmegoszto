@@ -27,7 +27,7 @@
                         <td class="middle-buttons">
                             <a href="<%=`/routes/show/${route.id}`%>" class="btn btn-success mybtn"><i class="fas fa-medal"></i></a>
                             <a href="<%=`/routes/edit/${route.id}`%>" class="btn btn-warning mybtn white" ><i class="fas fa-edit"></i></a>
-                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-route-modal" onclick="fillDeleteModal(this, <%= route.id %>)"><i class="fas fa-trash-alt"></i></button>
+                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, <%= route.id %>)"><i class="fas fa-trash-alt"></i></button>
                         </td>
                     </tr>
                 <% }) %>
@@ -37,9 +37,12 @@
     <%- include('deleteModal', {route: {}}) %>
     <script>
         function fillDeleteModal(el, id) {
+            const titlePrefix = "Útvonal törlése - "
+            const bodyPrefix = "Biztosan törlöd a(z) "
+            const bodyPostfix = "útvonalat? Ezzel a hozzá tartozó teljesítések is törlődnek. Ezt később nem tudod visszavonni!"
             const name = el.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.innerHTML;
-            document.getElementById('modal-title').innerHTML = name;
-            document.getElementById('modal-body').innerHTML = name;
+            document.getElementById('modal-title').innerHTML = titlePrefix + name;
+            document.getElementById('modal-body').innerHTML = bodyPrefix + name + bodyPostfix;
             document.getElementById('deleteSubmit').setAttribute('href', '/routes/del/' + id);
         }
     </script>

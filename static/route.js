@@ -19,9 +19,12 @@ function fillModal(el, mode, id) {
 }
 
 function fillDeleteModal(el, id) {
+    const bodyPrefix = "Biztosan törlöd ezt a teljesítést? "
+    const bodyPostfix = " Ezt később nem tudod visszavonni!"
     const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
     const time = el.parentElement.parentElement.previousElementSibling.innerHTML;
-    document.getElementById('effort-data').innerHTML = ` ${name}, ${time}`;
+    document.getElementById('modal-title').innerHTML = "Teljesítés törlése";
+    document.getElementById('modal-body').innerHTML = bodyPrefix + ` ${name}, ${time}` + bodyPostfix;
     document.getElementById('deleteSubmit').setAttribute('href', '/efforts/del/' + id);
 }
 
