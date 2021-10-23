@@ -30,29 +30,48 @@ function onNewEditSubmit() {
     const name = document.getElementById('name').value
     const time = document.getElementById('time').value
     const type = document.getElementById('type').value
+    const formData = JSON.stringify({ name, time, type })
     if (id > 0) {
-        console.log(`POST request to /efforts/edit/${id} ...`)
+        fetch(`/efforts/edit/${id}`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: formData
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            if (data.errors.length !== 0) {
+                addErrors(data.errors)
+            } else {
+                window.location.reload()
+            }
+        })
     } else {
         fetch('/efforts/new', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ name, time, type })
+            body: formData
         })
         .then(resp => resp.json())
         .then(data => {
-            if (typeof data.errors !== "undefined") {
-                document.getElementById("errors").innerHTML = ''
-                document.getElementById("errors").removeAttribute('hidden')
-                data.errors.forEach(err => {
-                    const myErr = document.createElement('li')
-                    myErr.innerHTML = err
-                    document.getElementById("errors").appendChild(myErr)
-                })
+            if (data.errors.length !== 0) {
+                addErrors(data.errors)
             } else {
                 window.location.reload()
             }
         })
     }
+}
+
+function addErrors(errors) {
+    document.getElementById("errors").innerHTML = ''
+    document.getElementById("errors").removeAttribute('hidden')
+    errors.forEach(err => {
+        const myErr = document.createElement('li')
+        myErr.innerHTML = err
+        document.getElementById("errors").appendChild(myErr)
+    })
 }

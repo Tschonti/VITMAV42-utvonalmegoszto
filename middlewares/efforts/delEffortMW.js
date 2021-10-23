@@ -1,7 +1,7 @@
 //const requireOption = require('../requireOption');
 
 /**
- * Deletes the effort in res.locals.effort and returns a JSON indicating success or failure.
+ * Deletes the effort in res.locals.effort and redirects to the route's page.
  * @param {*} objectrepository
  * @returns
  */

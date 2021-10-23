@@ -23,6 +23,6 @@ module.exports = objectrepository => {
             return res.status(400).json({errors: errors})
         }
         //save to db...
-        return res.status(200).json({okay: true})
+        return res.status(200).json({errors: []})
     };
 };
