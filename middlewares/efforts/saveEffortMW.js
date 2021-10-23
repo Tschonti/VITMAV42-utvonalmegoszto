@@ -15,6 +15,12 @@ module.exports = objectrepository => {
             errors.push('Add meg a teljesítés időtartamát!')
         } else if (req.body.time.split(":").length !== 3) {
             errors.push("Érvénytelen időformátum! Helyesen: óó:pp:mm")
+        } else {
+            req.body.time.split(":").forEach(n => {
+                if (Number.isNaN(parseInt(n))) {
+                    errors.push('Érvénytelen óra, perc vagy másodperc!')
+                }
+            })
         } if (Number.isNaN(parseInt(req.body.type))) {
             errors.push('Érvénytelen teljesítési mód!')
         } else if (req.body.type < 1 || req.body.type > 3) {
