@@ -44,7 +44,7 @@ module.exports = app => {
         renderMW('route')
     )
 
-    app.post('/efforts/new',
+    app.post('/routes/new-effort/:route_id',
         saveEffortMW()  //sends JSON instead of rendering
     )
 

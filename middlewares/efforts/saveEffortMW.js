@@ -25,9 +25,12 @@ module.exports = objectrepository => {
             errors.push('Érvénytelen teljesítési mód!')
         } else if (req.body.type < 1 || req.body.type > 3) {
             errors.push('Érvénytelen teljesítési mód!')
-        } if (errors.length > 0) {
+        }
+
+        if (errors.length > 0) {
             return res.status(400).json({errors: errors})
         }
+
         //save to db...
         return res.status(200).json({errors: []})
     };

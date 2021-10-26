@@ -9,6 +9,8 @@ function clearModal() {
 }
 
 function fillModal(el, mode, id) {
+    document.getElementById("errors").innerHTML = '';
+    document.getElementById("errors").setAttribute('hidden', true)
     const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
     const time = el.parentElement.parentElement.previousElementSibling.innerHTML;
     document.getElementById('titlePartOne').innerHTML = 'Teljesítés szerkesztése';
@@ -28,7 +30,7 @@ function fillDeleteModal(el, id) {
     document.getElementById('deleteSubmit').setAttribute('href', '/efforts/del/' + id);
 }
 
-function onNewEditSubmit() {
+function onNewEditSubmit(route_id) {
     const id = document.getElementById('newEditSubmit').dataset.id;
     const name = document.getElementById('name').value
     const time = document.getElementById('time').value
@@ -51,7 +53,7 @@ function onNewEditSubmit() {
             }
         })
     } else {
-        fetch('/efforts/new', {
+        fetch(`/routes/new-effort/${route_id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
