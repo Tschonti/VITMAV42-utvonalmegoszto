@@ -37,7 +37,7 @@ function onNewEditSubmit(route_id) {
     const type = document.getElementById('type').value
     const formData = JSON.stringify({ name, time, type })
     if (id > 0) {
-        fetch(`/efforts/edit/${id}`, {
+        fetch(`/routes/${route_id}/edit-effort/${id}`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

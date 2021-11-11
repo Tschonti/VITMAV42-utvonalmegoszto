@@ -2,14 +2,18 @@
 
 /**
  * Gets the effort with id=:effort_id and stores it in res.locals.effort
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
-module.exports = objectrepository => {
+module.exports = or => {
     return (req, res, next) => {
-        res.locals.effort = {
-            id: 1
-        }
-        return next();
+        console.log(req.params.effort_id)
+        return or.EffortModel.findOne({ _id: req.params.effort_id }, (err, effort) => {
+            if (err) {
+                return next(err)
+            }
+            res.locals.effort = effort
+            return next();
+        })
     };
 };

@@ -11,50 +11,60 @@ const saveEffortMW = require('../middlewares/efforts/saveEffortMW')
 const delEffortMW = require('../middlewares/efforts/delEffortMW')
 const renderMW = require('../middlewares/renderMW')
 
+const RouteModel = require('../models/route');
+const EffortModel = require('../models/effort');
+
 module.exports = app => {
+    const objRepo = {
+        RouteModel: RouteModel,
+        EffortModel: EffortModel
+    }
+
     app.get('/',
-        getRoutesMW(),
-        getEffortCountMW(),
-        renderMW('index')
+        getRoutesMW(objRepo),
+        getEffortCountMW(objRepo),
+        renderMW('index', objRepo)
     )
 
     app.use('/routes/new',
-        saveRouteMW(),
-        getTitleMW(),
-        renderMW('new_edit')
+        saveRouteMW(objRepo),
+        getTitleMW(objRepo),
+        renderMW('new_edit', objRepo)
     )
 
     app.use('/routes/edit/:route_id',
-        getRouteMW(),
-        saveRouteMW(),
-        getTitleMW(),
-        renderMW('new_edit')
+        getRouteMW(objRepo),
+        saveRouteMW(objRepo),
+        getTitleMW(objRepo),
+        renderMW('new_edit', objRepo)
     )
 
     app.get('/routes/del/:route_id',
-        getRouteMW(),
-        getEffortsForRouteMW(),
-        delEffortsForRouteMW(),
-        delRouteMW()    //redirects instead of rendering
+        getRouteMW(objRepo),
+        getEffortsForRouteMW(objRepo),
+        delEffortsForRouteMW(objRepo),
+        delRouteMW(objRepo)    //redirects instead of rendering
     )
 
     app.get('/routes/show/:route_id',
-        getRouteMW(),
-        getEffortsForRouteMW(),
-        renderMW('route')
+        getRouteMW(objRepo),
+        getEffortsForRouteMW(objRepo),
+        renderMW('route', objRepo)
     )
 
     app.post('/routes/new-effort/:route_id',
-        saveEffortMW()  //sends JSON instead of rendering
+        getRouteMW(objRepo),
+        saveEffortMW(objRepo)  //sends JSON instead of rendering
     )
 
-    app.post('/efforts/edit/:effort_id',
-        getEffortMW(),
-        saveEffortMW()  //sends JSON instead of rendering
+    app.post('/routes/:route_id/edit-effort/:effort_id',
+        getRouteMW(objRepo),
+        getEffortMW(objRepo),
+        saveEffortMW(objRepo)  //sends JSON instead of rendering
     )
 
     app.get('/efforts/del/:effort_id',
-        getEffortMW(),
-        delEffortMW()   //redirects instead of rendering
+        getEffortMW(objRepo),
+        delEffortMW(objRepo)   //redirects instead of rendering
     )
 }

@@ -2,18 +2,18 @@
 
 /**
  * Gets the route with id=:route_id and stores it in res.locals.route
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
- module.exports = objectrepository => {
+ module.exports = or => {
     return (req, res, next) => {
-        res.locals.route = {
-                id: 1,
-                name: "Dobogó-kő túra",
-                length: 7.96,
-                elevation: 325,
-                link: "https://www.strava.com/routes/2872918524354908336"
+        console.log(req.params.route_id)
+        return or.RouteModel.findOne({ _id: req.params.route_id}, (err, route) => {
+            if (err) {
+                return next(err)
             }
-        return next();
+            res.locals.route = route
+            return next();
+        })
     };
 };

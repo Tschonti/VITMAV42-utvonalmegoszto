@@ -2,11 +2,16 @@
 
 /**
  * Deletes the route in res.locals.route. Redirects to '/'
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
-module.exports = objectrepository => {
+module.exports = or => {
     return (req, res, next) => {
-        return res.redirect('/')
+        res.locals.route.remove(err => {
+            if (err) {
+                return next(err)
+            }
+            return res.redirect('/')
+        })
     };
 };

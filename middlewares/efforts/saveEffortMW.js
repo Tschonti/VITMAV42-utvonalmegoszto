@@ -3,10 +3,10 @@
 /**
  * Saves or updates an effort with POST parameters. If res.locals.effort exists, it's an update, otherwise it's creation.
  * Returns a JSON indicating success or failure.
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
-module.exports = objectrepository => {
+module.exports = or => {
     return (req, res, next) => {
         const errors = []
         if (req.body.name === '') {
@@ -31,7 +31,20 @@ module.exports = objectrepository => {
             return res.status(400).json({errors: errors})
         }
 
-        //save to db...
-        return res.status(200).json({errors: []})
+        const newEffort = res.locals.effort ? res.locals.effort : new or.EffortModel()
+
+        newEffort.name = req.body.name
+        const [hour, min, sec] = req.body.time.split(":")
+        newEffort.time = parseInt(sec) + parseInt(min)*60 + parseInt(hour)*3600
+        newEffort.type = req.body.type
+        newEffort._route = res.locals.route._id
+
+        return newEffort.save(err => {
+            if (err) {
+                return next(err)
+            }
+            return res.status(200).json({errors: []})
+        })
+
     };
 };

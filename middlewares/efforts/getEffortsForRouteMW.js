@@ -2,43 +2,28 @@
 
 /**
  * Gets all the efforts that belong to res.locals.route, ordered by time in ascending order and stores them in res.locals, separately by sport.
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
-module.exports = objectrepository => {
+module.exports = or => {
     return (req, res, next) => {
         res.locals.title = "Útvonalmegosztó - " + res.locals.route.name
-        res.locals.efforts = {
-            running: [
-                {
-                    id: 3,
-                    name: "Nagy Endre",
-                    time: "00:42:37"
-                },
-                {
-                    id: 4,
-                    name: "Horváth Eszter",
-                    time: "00:45:11"
-                },
-                {
-                    id: 5,
-                    name: "Dalai Láma",
-                    time: "01:06:02"
-                }
-            ],
-            cycling: [],
-            hiking: [
-            {
-                id: 1,
-                name: "Fekete Sámuel",
-                time: "3:15:00"
-            },
-            {
-                id: 2,
-                name: "Kovács István",
-                time: "5:47:22"
-            }]
-        }
-        return next();
+        return or.EffortModel.find({ _route: res.locals.route._id }).sort({ time: 'asc'}).exec((err, efforts) => {
+            if (err) {
+                return next(err)
+            }
+            efforts.forEach(effort => {
+                const hours = parseInt(effort.time / 3600)
+                const mins = parseInt((effort.time - hours*3600) / 60)
+                const secs = effort.time - hours*3600 - mins*60
+                effort.time = `${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`;
+                //console.log(`${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`)
+            })
+            res.locals.efforts = {}
+            res.locals.efforts.hiking = efforts.filter(effort => effort.type === 1)
+            res.locals.efforts.running = efforts.filter(effort => effort.type === 2)
+            res.locals.efforts.cycling = efforts.filter(effort => effort.type === 3)
+            return next();
+        })
     };
 };

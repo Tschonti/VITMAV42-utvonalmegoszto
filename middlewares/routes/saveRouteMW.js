@@ -12,13 +12,13 @@ module.exports = objectrepository => {
         if (req.method === "POST") {
             if (req.body.name === '') {
                 (res.locals.errors = res.locals.errors || []).push('Adj nevet az útvonalnak!')
-            } if (req.body.length === '') {
+            } if (req.body.distance === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal hosszát!')
             } if (req.body.elevation === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal szintemelkedését!')
             } if (req.body.link === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal linkjét!')
-            } if (Number.isNaN(parseFloat(req.body.length))) {
+            } if (Number.isNaN(parseFloat(req.body.distance))) {
                 (res.locals.errors = res.locals.errors || []).push('Az útvonal hosszának számnak kell lennie!')
             } if (Number.isNaN(parseInt(req.body.elevation))) {
                 (res.locals.errors = res.locals.errors || []).push('Az útvonal szintemelkedésének egész számnak kell lennie!')
@@ -29,8 +29,18 @@ module.exports = objectrepository => {
                 return next()
             }
 
-            //save to db...
-            return res.redirect('/')
+            const newRoute = res.locals.route ? res.locals.route : new objectrepository.RouteModel()
+            newRoute.name = req.body.name
+            newRoute.distance = req.body.distance
+            newRoute.elevation = req.body.elevation
+            newRoute.link = req.body.link
+
+            return newRoute.save(err => {
+                if (err) {
+                    return next(err)
+                }
+                return res.redirect(`/routes/show/${newRoute._id}`)
+            })
         }
         return next()
     };

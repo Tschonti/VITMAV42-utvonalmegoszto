@@ -7,7 +7,7 @@
             </div>
         </div>
         <p>
-            Hossz: <%= route.length %> km <br/>
+            Hossz: <%= route.distance %> km <br/>
             Szintemelkedés: <%= route.elevation %> m <br/>
             Link: <a class="mylink" rel="noopener noreferrer" target="_blank" href="<%= route.link %>"><%= route.link %></a>
         </p>
@@ -36,8 +36,8 @@
                                     <td><%= effort.time %></td>
                                     <td>
                                         <div class="flex2">
-                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 0, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 0, '<%= effort._id %>')"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, '<%= effort._id %>'')"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -66,8 +66,8 @@
                                     <td><%= effort.time %></td>
                                     <td>
                                         <div class="flex2">
-                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 1, '<%= effort._id %>')"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, '<%= effort._id %>')"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -96,8 +96,8 @@
                                     <td><%= effort.time %></td>
                                     <td>
                                         <div class="flex2">
-                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 2, <%= effort.id %>)"><i class="fas fa-edit"></i></button>
-                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, <%= effort.id %>)"><i class="fas fa-trash-alt"></i></button>
+                                            <button class="btn btn-warning mybtn white" data-bs-toggle="modal" data-bs-target="#new-effort-modal" onclick="fillModal(this, 2, '<%= effort._id %>')"><i class="fas fa-edit"></i></button>
+                                            <button class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#delete-modal" onclick="fillDeleteModal(this, '<%= effort._id %>')"><i class="fas fa-trash-alt"></i></button>
                                         </div>
                                     </td>
                                 </tr>
@@ -141,7 +141,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Mégse</button>
-                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit(<%= route.id %>)">Mentés</button>
+                    <button type="button" id="newEditSubmit" class="btn btn-success" data-id="" onclick="onNewEditSubmit('<%= route.id %>')">Mentés</button>
                 </div>
             </div>
         </div>
