@@ -3,7 +3,7 @@ const db = require('../config/db');
 
 const Effort = db.model('Effort', {
     name: String,
-    time: Number,
+    time: String,
     type: Number,
     _route: {
         type: Schema.Types.ObjectId,

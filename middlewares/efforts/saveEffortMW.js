@@ -35,7 +35,7 @@ module.exports = or => {
 
         newEffort.name = req.body.name
         const [hour, min, sec] = req.body.time.split(":")
-        newEffort.time = parseInt(sec) + parseInt(min)*60 + parseInt(hour)*3600
+        newEffort.time = `${hour.padStart(2, '0')}:${min.padStart(2, '0')}:${sec.padStart(2, '0')}`
         newEffort.type = req.body.type
         newEffort._route = res.locals.route._id
 

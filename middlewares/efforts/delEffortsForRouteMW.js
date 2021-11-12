@@ -2,11 +2,16 @@
 
 /**
  * Deletes all efforts stored in res.locals.efforts (separately by sports)
- * @param {*} objectrepository
+ * @param {*} or
  * @returns
  */
-module.exports = objectrepository => {
+module.exports = or => {
     return (req, res, next) => {
-        return next();
+        or.EffortModel.deleteMany({_route: res.locals.route._id}, err => {
+            if (err) {
+                return next(err)
+            }
+            return next();
+        })
     };
 };

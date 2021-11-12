@@ -7,7 +7,6 @@
  */
  module.exports = or => {
     return (req, res, next) => {
-        console.log(req.params.route_id)
         return or.RouteModel.findOne({ _id: req.params.route_id}, (err, route) => {
             if (err) {
                 return next(err)

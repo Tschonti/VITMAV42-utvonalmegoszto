@@ -20,14 +20,14 @@ function fillModal(el, mode, id) {
     document.getElementById('newEditSubmit').dataset.id = id;
 }
 
-function fillDeleteModal(el, id) {
+function fillDeleteModal(el, effort_id, route_id) {
     const bodyPrefix = "Biztosan törlöd ezt a teljesítést? "
     const bodyPostfix = " Ezt később nem tudod visszavonni!"
     const name = el.parentElement.parentElement.previousElementSibling.previousElementSibling.innerHTML;
     const time = el.parentElement.parentElement.previousElementSibling.innerHTML;
     document.getElementById('modal-title').innerHTML = "Teljesítés törlése";
     document.getElementById('modal-body').innerHTML = bodyPrefix + ` ${name}, ${time}` + bodyPostfix;
-    document.getElementById('deleteSubmit').setAttribute('href', '/efforts/del/' + id);
+    document.getElementById('deleteSubmit').setAttribute('href', '/routes/' + route_id + '/del-effort/' + effort_id);
 }
 
 function onNewEditSubmit(route_id) {
@@ -36,7 +36,7 @@ function onNewEditSubmit(route_id) {
     const time = document.getElementById('time').value
     const type = document.getElementById('type').value
     const formData = JSON.stringify({ name, time, type })
-    if (id > 0) {
+    if (id) {
         fetch(`/routes/${route_id}/edit-effort/${id}`, {
             method: 'POST',
             headers: {

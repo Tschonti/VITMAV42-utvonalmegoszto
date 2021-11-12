@@ -11,7 +11,7 @@ module.exports = or => {
             if (err) {
                 return next(err)
             }
-            res.locals.routes = routes
+            res.locals.routes = routes.map(route => route.toObject())
             return next();
         })
     };

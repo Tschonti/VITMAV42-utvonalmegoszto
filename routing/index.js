@@ -41,7 +41,6 @@ module.exports = app => {
 
     app.get('/routes/del/:route_id',
         getRouteMW(objRepo),
-        getEffortsForRouteMW(objRepo),
         delEffortsForRouteMW(objRepo),
         delRouteMW(objRepo)    //redirects instead of rendering
     )
@@ -63,7 +62,8 @@ module.exports = app => {
         saveEffortMW(objRepo)  //sends JSON instead of rendering
     )
 
-    app.get('/efforts/del/:effort_id',
+    app.get('/routes/:route_id/del-effort/:effort_id',
+        getRouteMW(objRepo),
         getEffortMW(objRepo),
         delEffortMW(objRepo)   //redirects instead of rendering
     )

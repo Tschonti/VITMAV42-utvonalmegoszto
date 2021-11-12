@@ -12,13 +12,15 @@ module.exports = or => {
             if (err) {
                 return next(err)
             }
-            efforts.forEach(effort => {
+            /*efforts.forEach(effort => {
                 const hours = parseInt(effort.time / 3600)
                 const mins = parseInt((effort.time - hours*3600) / 60)
                 const secs = effort.time - hours*3600 - mins*60
-                effort.time = `${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`;
+                const timeWellFormated = `${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`
+                effort.formattedTime = timeWellFormated
+                console.log(effort)
                 //console.log(`${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`)
-            })
+            })*/
             res.locals.efforts = {}
             res.locals.efforts.hiking = efforts.filter(effort => effort.type === 1)
             res.locals.efforts.running = efforts.filter(effort => effort.type === 2)

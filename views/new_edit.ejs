@@ -7,7 +7,7 @@
                 Útvonal szerkesztése
             <% } %>
         </h1>
-        <form method="post" action="<%=`/routes/${typeof(route) === 'undefined' ? 'new' : 'edit/' + route.id}`%>">
+        <form method="post" action="<%=`/routes/${typeof(route) === 'undefined' ? 'new' : 'edit/' + route._id}`%>">
             <div class="mb-3">
                 <label for="name" class="form-label">Útvonal neve</label>
                 <input class="form-control" id="name" name="name" placeholder="Útvonal neve..." value="<%= typeof route === 'undefined' ? '' : route.name %>">
