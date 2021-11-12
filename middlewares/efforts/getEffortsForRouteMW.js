@@ -12,19 +12,11 @@ module.exports = or => {
             if (err) {
                 return next(err)
             }
-            /*efforts.forEach(effort => {
-                const hours = parseInt(effort.time / 3600)
-                const mins = parseInt((effort.time - hours*3600) / 60)
-                const secs = effort.time - hours*3600 - mins*60
-                const timeWellFormated = `${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`
-                effort.formattedTime = timeWellFormated
-                console.log(effort)
-                //console.log(`${(hours+'').padStart(2, '0')}:${(mins+'').padStart(2, '0')}:${(secs+'').padStart(2, '0')}`)
-            })*/
-            res.locals.efforts = {}
-            res.locals.efforts.hiking = efforts.filter(effort => effort.type === 1)
-            res.locals.efforts.running = efforts.filter(effort => effort.type === 2)
-            res.locals.efforts.cycling = efforts.filter(effort => effort.type === 3)
+            res.locals.efforts = {
+                hiking: efforts.filter(effort => effort.type === 1),
+                running: efforts.filter(effort => effort.type === 2),
+                cycling: efforts.filter(effort => effort.type === 3)
+            }
             return next();
         })
     };
