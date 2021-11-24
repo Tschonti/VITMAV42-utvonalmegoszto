@@ -9,9 +9,9 @@
 module.exports = or => {
     return (req, res, next) => {
         const errors = []
-        if (req.body.name === '') {
+        if (req.body.name.trim() === '') {
             errors.push('Add meg a teljesítő nevét!')
-        } if (req.body.time === '') {
+        } if (req.body.time.trim() === '') {
             errors.push('Add meg a teljesítés időtartamát!')
         } else if (req.body.time.split(":").length !== 3) {
             errors.push("Érvénytelen időformátum! Helyesen: óó:pp:mm")

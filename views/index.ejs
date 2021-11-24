@@ -43,7 +43,7 @@
         function fillDeleteModal(el, id) {
             const titlePrefix = "Útvonal törlése - ";
             const bodyPrefix = "Biztosan törlöd a(z) ";
-            const bodyPostfix = "útvonalat? Ezzel a hozzá tartozó teljesítések is törlődnek. Ezt később nem tudod visszavonni!";
+            const bodyPostfix = " útvonalat? Ezzel a hozzá tartozó teljesítések is törlődnek. Ezt később nem tudod visszavonni!";
             const name = el.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.previousElementSibling.firstElementChild.innerHTML;
             document.getElementById('modal-title').innerHTML = titlePrefix + name;
             document.getElementById('modal-body').innerHTML = bodyPrefix + name + bodyPostfix;

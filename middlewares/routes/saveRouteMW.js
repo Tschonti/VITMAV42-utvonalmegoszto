@@ -10,13 +10,13 @@
 module.exports = objectrepository => {
     return (req, res, next) => {
         if (req.method === "POST") {
-            if (req.body.name === '') {
+            if (req.body.name.trim() === '') {
                 (res.locals.errors = res.locals.errors || []).push('Adj nevet az útvonalnak!')
-            } if (req.body.distance === '') {
+            } if (req.body.distance.trim() === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal hosszát!')
-            } if (req.body.elevation === '') {
+            } if (req.body.elevation.trim() === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal szintemelkedését!')
-            } if (req.body.link === '') {
+            } if (req.body.link.trim() === '') {
                 (res.locals.errors = res.locals.errors || []).push('Add meg az útvonal linkjét!')
             } if (Number.isNaN(parseFloat(req.body.distance))) {
                 (res.locals.errors = res.locals.errors || []).push('Az útvonal hosszának számnak kell lennie!')
