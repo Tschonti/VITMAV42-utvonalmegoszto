@@ -18,20 +18,16 @@ describe('saveEffort middleware ', function () {
         }
 
         const res = {
-            status: (code) => {
-                return {
-                    json: (obj) => {return {errors: obj.errors, status: code}}
-                }
-            },
+            status: (code) => ({
+                json: (obj) => ({errors: obj.errors, status: code})
+            }),
             locals: {
                 route: {
                     id: 2
                 }
             }
         }
-
-        const saveMW = saveEffortMW({EffortModel: fakeEffortModel})
-        const result = saveMW(req, res)
+        const result = saveEffortMW({EffortModel: fakeEffortModel})(req, res)
         expect(result).to.eql({errors: [], status: 200})
     })
 
@@ -45,11 +41,9 @@ describe('saveEffort middleware ', function () {
         }
 
         const res = {
-            status: (code) => {
-                return {
-                    json: (obj) => {return {errors: obj.errors, status: code}}
-                }
-            },
+            status: (code) => ({
+                json: (obj) => ({errors: obj.errors, status: code})
+            }),
             locals: {
                 route: {
                     id: 2
@@ -59,9 +53,7 @@ describe('saveEffort middleware ', function () {
                 }
             }
         }
-
-        const saveMW = saveEffortMW()
-        const result = saveMW(req, res)
+        const result = saveEffortMW()(req, res)
         expect(result).to.eql({errors: [], status: 200})
     })
 
@@ -84,9 +76,7 @@ describe('saveEffort middleware ', function () {
                 }
             }
         }
-
-        const saveMW = saveEffortMW({})
-        const result = saveMW(req, res)
+        const result = saveEffortMW({})(req, res)
         expect(result).to.eql({errors: ['Add meg a teljesítő nevét!', 'Érvénytelen időformátum! Helyesen: óó:pp:mm', 'Érvénytelen teljesítési mód!'], status: 400})
     })
 
@@ -109,9 +99,7 @@ describe('saveEffort middleware ', function () {
                 }
             }
         }
-
-        const saveMW = saveEffortMW({})
-        const result = saveMW(req, res)
+        const result = saveEffortMW({})(req, res)
         expect(result).to.eql({errors: ['Add meg a teljesítő nevét!', 'Érvénytelen óra, perc vagy másodperc!', 'Érvénytelen teljesítési mód!'], status: 400})
     })
 
@@ -134,9 +122,7 @@ describe('saveEffort middleware ', function () {
                 }
             }
         }
-
-        const saveMW = saveEffortMW({})
-        const result = saveMW(req, res)
+        const result = saveEffortMW({})(req, res)
         expect(result).to.eql({errors: ['Add meg a teljesítés időtartamát!', 'Érvénytelen teljesítési mód!'], status: 400})
     })
 
@@ -158,7 +144,7 @@ describe('saveEffort middleware ', function () {
         }
 
         const fakeEffortModel = class EffortModel {
-            save(cb){
+            save(cb) {
                 return cb("hiba")
             }
         }

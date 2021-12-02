@@ -9,7 +9,7 @@ describe('getRoutes middleware ', () => {
       locals: {}
     };
     const fakeRouteModel = {
-      find: function (some, cb) {
+      find: (some, cb) => {
         cb(undefined, [{toObject: () => 'route1'}, {toObject: () => 'route2'}])
       }
     };
