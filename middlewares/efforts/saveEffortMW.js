@@ -33,7 +33,7 @@ module.exports = or => {
 
         const newEffort = res.locals.effort ? res.locals.effort : new or.EffortModel()
 
-        newEffort.name = req.body.name
+        newEffort.name = req.body.name.trim()
         const [hour, min, sec] = req.body.time.split(":")
         newEffort.time = `${hour.padStart(2, '0')}:${min.padStart(2, '0')}:${sec.padStart(2, '0')}`
         newEffort.type = req.body.type
